@@ -1,1 +1,5 @@
 - handle directories that need to be available across all deployments i.e. a folder containing user's file uploads
+- remove old deployment directories, so that the disk space doesn't grow too quickly
+- allow the user to copy the node_modules directory from the previous deployment to the new deployment, to save time
+- rollback
+- database migrations
