@@ -1,0 +1,23 @@
+{
+  "name": "redstone",
+  "version": "0.0.0",
+  "description": "A tool for deploying Node.js applications, heavily influenced by Capistrano.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/axisto-live/redstone.git"
+  },
+  "keywords": [
+    "deployment"
+  ],
+  "author": "Axisto Media Ltd <paul.jensen@axisto.com>",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "f91751d7c86bfe495faaf4377ac8550182b9035a",
+  "dependencies": {
+    "sshclient": "git://github.com/sperka/node-sshclient.git"
+  }
+}

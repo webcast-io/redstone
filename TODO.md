@@ -1,0 +1,1 @@
+- handle directories that need to be available across all deployments i.e. a folder containing user's file uploads
