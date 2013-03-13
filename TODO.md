@@ -3,3 +3,4 @@
 - allow the user to copy the node_modules directory from the previous deployment to the new deployment, to save time
 - rollback
 - database migrations
+- support for custom commands, before deploy, after deploy (i.e. grunt support, bower component install)
