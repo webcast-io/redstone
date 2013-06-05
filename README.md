@@ -1,5 +1,4 @@
-Redstone
-========
+![Redstone](https://raw.github.com/axisto-live/redstone/master/redstone.png)
 
 A tool for deploying Node.js applications, heavily influenced by Capistrano.
 
