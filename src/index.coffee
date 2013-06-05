@@ -1,7 +1,83 @@
+# Module dependencies
 sshclient   = require 'sshclient'
 fs          = require 'fs'
 _           = require 'underscore'
 colors      = require 'colors'
+
+# This creates the deployment paths
+# for the app, based on user options
+setDeploymentPaths = (options, cb) ->
+  try
+    timestamp             = Date.now().toString()
+    basePath              = "#{options.baseDir}#{options.appName}/"
+    deploymentsPath       = "#{basePath}deployments/"
+    currentFolder         = "#{basePath}current/"
+    outputFolder          = "#{deploymentsPath}#{timestamp}"
+    cb null, {timestamp, basePath, deploymentsPath, currentFolder, outputFolder}
+  catch err
+    console.log err
+    cb err, null
+
+insertkeywordVariables = (commands, paths, options) ->
+  return _.map commands, (cmd) ->
+    return cmd
+      .replace('OUTPUT_PATH',paths.outputFolder)
+      .replace('CURRENT_PATH',paths.currentFolder)
+      .replace('BASE_PATH',paths.basePath)
+      .replace('DEPLOYMENTS_PATH',paths.deploymentsPath)
+      .replace('TIMESTAMP',paths.timeStamp)
+      .replace('GIT_REPO', options.repo)
+      .replace('INSTALL_COMMAND', options.commands.install)
+      .replace('RESTART_COMMAND', options.commands.restart)
+      .replace('START_COMMAND', options.commands.start)
+
+# We could move this into the configuration file
+
+coldSetupCommands = [
+  "mkdir BASE_PATH",
+  "mkdir DEPLOYMENTS_PATH"
+]
+
+installCommands = [
+  "git clone GIT_REPO OUTPUT_PATH",
+  "cd OUTPUT_PATH && INSTALL_COMMAND"
+]
+
+startCommands = [
+  "cd BASE_PATH && ln -s OUTPUT_PATH current",
+  "cd CURRENT_PATH && START_COMMAND"
+]
+
+restartCommands = [
+  "cd BASE_PATH && ln -sfn OUTPUT_PATH current",
+  "cd CURRENT_PATH && RESTART_COMMAND"
+]
+
+displayResult = (command, exitCode, stderr) ->
+  if exitCode is 0
+    console.log "✔ #{command}".green
+  else
+    console.log "✘ #{command}".red
+    console.log stderr.red
+
+handleResult = (exitCode, number, commands, ssh, self, stderr, cb) ->
+  if exitCode is 0 and number < commands.length-1
+    executeTheNextCommand self, ssh, commands, number, cb
+  else
+    handleError stderr, exitCode, cb
+
+executeTheNextCommand = (self, ssh, commands, number, cb) ->
+  number++
+  self.runCommand ssh, commands, number, cb
+
+handleError = (stderr, exitCode, cb) ->
+  err = new Error stderr if exitCode is 1
+  cb err if typeof cb is 'function'  
+
+launch = (ssh, options, preProcessedCommands, self, cb) ->
+  setDeploymentPaths options, (err, paths) ->
+    commands              = insertkeywordVariables preProcessedCommands, paths, options
+    self.runCommands ssh, commands, cb
 
 module.exports =
 
@@ -16,61 +92,13 @@ module.exports =
 
   # This creates the folders that are needed to deploy the application
   coldSetup: (ssh, options, cb) ->
-    timeStamp       = Date.now().toString()
-    basePath        = options.baseDir + options.appName + "/"
-    deploymentsPath = basePath + "deployments/"
-    currentFolder   = basePath + "current/"
-    outputFolder    = deploymentsPath + timeStamp
-
-    coldSetupCommands = [
-      "mkdir #{basePath}",
-      "mkdir #{deploymentsPath}"
-    ]
-
-    installCommands = [
-      "git clone #{options.repo} #{outputFolder}",
-      "cd #{outputFolder} && #{options.commands.install}"
-    ]
-
-    restartCommands = [
-      "cd #{basePath} && ln -s #{outputFolder} current",
-      "cd #{currentFolder} && #{options.commands.start}"
-    ]
-
-    commands = _.union coldSetupCommands, installCommands, restartCommands
-
-    @runCommands ssh, commands, cb
+    preProcessedCommands  = _.union coldSetupCommands, installCommands, startCommands
+    launch ssh, options, preProcessedCommands, @, cb
 
   # This runs a deployment of the application into a time-stamped folder
   update: (ssh, options, cb) ->
-    timeStamp       = Date.now().toString()
-    basePath        = options.baseDir + options.appName + "/"
-    deploymentsPath = basePath + "deployments/"
-    currentFolder   = basePath + "current/"
-    outputFolder    = deploymentsPath + timeStamp
-
-    insertkeywordVariables = (commands) ->
-      return _.map commands, (cmd) ->
-        return cmd
-          .replace('OUTPUT_PATH',outputFolder)
-          .replace('CURRENT_PATH',currentFolder)
-          .replace('BASE_PATH',basePath)
-          .replace('DEPLOYMENTS_PATH',deploymentsPath)
-          .replace('TIMESTAMP',timeStamp)
-          .replace('GIT_REPO', options.repo);
-
-    installCommands = [
-      "git clone GIT_REPO OUTPUT_PATH",
-      "cd OUTPUT_PATH && #{options.commands.install}"
-    ]
-
-    restartCommands = [
-      "cd BASE_PATH && ln -sfn OUTPUT_PATH current",
-      "cd CURRENT_PATH && #{options.commands.restart}"
-    ]
-
-    commands = insertkeywordVariables _.union installCommands, options.commands.afterInstall, restartCommands
-    @runCommands ssh, commands, cb
+    preProcessedCommands  = _.union installCommands, options.commands.afterInstall, restartCommands
+    launch ssh, options, preProcessedCommands, @, cb
 
   runCommands: (ssh, commands, cb) ->
     currentCommandNumber = 0
@@ -78,18 +106,6 @@ module.exports =
       cb err if typeof cb is 'function' 
 
   runCommand: (ssh, commands, number, cb) ->
-    err   = null
-    self  = @
-    ssh.command commands[number], (procResult) ->
-      if procResult.exitCode is 0
-        console.log "✔ #{commands[number]}".green
-      else
-        console.log "✘ #{commands[number]}".red
-        console.log procResult.stderr.red
-
-      if procResult.exitCode is 0 and number < commands.length-1
-        number++
-        self.runCommand ssh, commands, number, cb
-      else
-        err = new Error procResult.stderr if procResult.exitCode is 1
-        cb err if typeof cb is 'function'
+    ssh.command commands[number], (procResult) =>
+      displayResult commands[number], procResult.exitCode, procResult.stderr
+      handleResult procResult.exitCode, number, commands, ssh, @, procResult.stderr, cb

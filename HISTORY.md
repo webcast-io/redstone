@@ -1,8 +1,12 @@
+0.0.3
+---
+
+- Refactored the codebase
+
 0.0.2
 ---
 
 - Converted the source code into CoffeeScript
--
 
 0.0.1 
 ---
