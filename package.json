@@ -1,11 +1,8 @@
 {
   "name": "redstone",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A tool for deploying Node.js applications, heavily influenced by Capistrano.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/axisto-live/redstone.git"
@@ -14,12 +11,19 @@
     "deployment"
   ],
   "author": "Axisto Media Ltd <paul.jensen@axisto.com>",
-  "license": "BSD",
-  "readmeFilename": "README.md",
-  "gitHead": "f91751d7c86bfe495faaf4377ac8550182b9035a",
-  "dependencies": {
-    "sshclient": "git://github.com/sperka/node-sshclient.git",
-    "underscore":"1.4.4",
-    "colors":"0.6.0-1"
+  "license"         : "BSD",
+  "readmeFilename"  : "README.md",
+  "gitHead"         : "f91751d7c86bfe495faaf4377ac8550182b9035a",
+  "devDependencies" : {
+    "coffee-script" : "1.6.2"
+  },
+  "dependencies"  : {
+    "colors"      : "0.6.0-1",
+    "sshclient"   : "git://github.com/sperka/node-sshclient.git",
+    "underscore"  : "1.4.4"
+  },
+  "scripts"     : {
+    "compile"   : "node_modules/.bin/coffee -c -o lib src",
+    "test"      : "echo \"Error: no test specified\" && exit 1"
   }
 }
