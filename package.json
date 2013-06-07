@@ -1,6 +1,6 @@
 {
   "name": "redstone",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A tool for deploying Node.js applications, heavily influenced by Capistrano.",
   "main": "lib/index.js",
   "repository": {
@@ -10,7 +10,7 @@
   "keywords": [
     "deployment"
   ],
-  "author": "Axisto Media Ltd <paul.jensen@axisto.com>",
+  "authors": ["Axisto Media Ltd <paul.jensen@axisto.com>", "Tom Loudon <tom.loudon@axisto.com>"],
   "license"         : "BSD",
   "readmeFilename"  : "README.md",
   "gitHead"         : "f91751d7c86bfe495faaf4377ac8550182b9035a",
@@ -19,11 +19,15 @@
   },
   "dependencies"  : {
     "colors"      : "0.6.0-1",
-    "sshclient"   : "git://github.com/sperka/node-sshclient.git",
+    "sshclient"   : "git://github.com/paulbjensen/node-sshclient.git",
     "underscore"  : "1.4.4"
   },
+  "devDependencies": {
+    "docco"       : ""
+  },
   "scripts"     : {
-    "compile"   : "node_modules/.bin/coffee -c -o lib src",
-    "test"      : "echo \"Error: no test specified\" && exit 1"
+    "compile"       : "node_modules/.bin/coffee -c -o lib src",
+    "compile-docs"  : "node_modules/.bin/docco src/*.coffee",
+    "test"          : "echo \"Error: no test specified\" && exit 1"
   }
 }

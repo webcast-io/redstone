@@ -1,3 +1,9 @@
+0.0.4
+---
+
+- Rearchitected how Redstone works
+- Added support for running custom commands
+
 0.0.3
 ---
 

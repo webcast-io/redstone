@@ -7,43 +7,25 @@ Installation
 
     npm install redstone
 
-Usage
+Usage (via Node)
 ---
 
-At the moment, redstone is required programmatically, but a CLI option will be added soon.
+    var Redstone = require("redstone");
 
-    var redstone = require('redstone');
-
-    var options = {
-        appName     : "YOUR-APP-NAME"
-      , repo        : "git@github.com:ACCOUNT/REPO.git"
-      , user        : "root"
-      , publicKey   : "PATH_TO/PUBLIC_KEY"
-      , hostname    : "IP_ADDRESS"
-      , port        : PORT_NUMBER
-      , baseDir     : "PATH_TO_DIR_WHERE_APP_FILES_WILL_EXIST"
-      , commands    : {
-          install : "COMMAND_TO_INSTALL_DEPENDENCIES"
-        , start   : "COMMAND_TO_START_APP"
-        , stop    : "COMMAND_TO_STOP_APP"
-        , restart : "COMMAND_TO_RESTART_APP"
+    var config = {
+      ssh: {
+        hostname   : "myappserver.com"
+        user 	   : "admin"
+        port       : 22
+      }, 
+      commands: {
+        list_files: "ls -ll"
       }
     };
-
-
-    // To run a first-time setup of the app
-    // on your server:
-    redstone.login(options, function(ssh){
-      redstone.coldSetup(ssh, options, function(err){
-      });
-    });
-
-    // To deploy an update of your app to
-    // the server:
-    redstone.login(options, function(ssh){
-      redstone.update(ssh, options, function(err){
-      });
-    });
+    
+    var redstone = new Redstone(config);
+    redstone.
+    
 
 License
 ---
