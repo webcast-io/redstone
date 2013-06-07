@@ -1,3 +1,11 @@
+0.0.5
+---
+
+- TODO - TESTS
+- TODO - Better usage docs
+- TODO - Recipes
+- TODO - Pipe data from the previous command into the next, in order to support rollback, cleaning up old dirs.
+
 0.0.4
 ---
 
