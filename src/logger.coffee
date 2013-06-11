@@ -1,3 +1,6 @@
+# Dependencies
+colors = require 'colors'
+
 # Logs the command result to the terminal, and applies colors to indicate
 # whether the command ran successfully or not.
 #

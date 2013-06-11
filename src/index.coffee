@@ -1,13 +1,9 @@
-# This is starting point of the npm module
-
-# Module dependencies
-sshclient   = require 'sshclient'
-colors      = require 'colors'
+sshclient = require 'sshclient'
 
 # Create an object for loading modules that require each other.
 # This avoids a chicken-egg problem when decoupling modules
 # that depend upon each other.
-libs        = {}
+libs = {}
 require('./logger') libs
 require('./loader') libs
 require('./runner') libs

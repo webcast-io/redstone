@@ -1,6 +1,8 @@
 ![Redstone](https://raw.github.com/axisto-live/redstone/master/redstone.png)
 
-A tool for deploying Node.js applications, heavily influenced by Capistrano.
+A tool for remotely executing configurable scripts on servers. 
+
+This library began as a tool for deploying Node.js applications, heavily influenced by Capistrano. Over time, we realised that we could abstract away the commands that we used to deploy our web applications, leaving us a tool that could any commands we pleased. 
 
 Installation
 ---
