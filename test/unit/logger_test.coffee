@@ -18,5 +18,5 @@ describe "logger", ->
       stderr: null
     logger @ctx.libs    
     @ctx.libs.logger "list_files", "ls -ll", mockResult
-    # what assertions do we want to make here?
-    done()
+    err = new Error "have not completed all assertions here yet"
+    done err

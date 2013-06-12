@@ -22,6 +22,7 @@ describe "runner", ->
     logger @ctx.libs
     loader @ctx.libs
     @ctx.libs.loader @ctx, 'list_files', 'ls -ll'
+    @ctx.libs.loader @ctx, 'print_date', 'date'
     done()
 
   describe "runCommand", ->
@@ -30,8 +31,13 @@ describe "runner", ->
       currentCommandNumber  = 0
       @ctx.libs.runner.runCommand @ctx, ['list_files'], currentCommandNumber, (err) ->
         assert.equal null, err
-        done()
-
+        err = new Error "have not completed all assertions here yet"
+        done err
+        
   describe "runCommands", ->
 
-    it "should run a list of commands, in sequential order"
+    it "should run a list of commands, in sequential order", (done) ->
+      @ctx.libs.runner.runCommands @ctx, ['list_files', 'print_date'], (err) ->
+        assert.equal null, err
+        err = new Error "have not completed all assertions here yet"
+        done err
