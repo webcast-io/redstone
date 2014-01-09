@@ -1,6 +1,6 @@
 {
   "name": "redstone",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A tool for deploying Node.js applications, heavily influenced by Capistrano.",
   "main": "lib/index.js",
   "repository": {
@@ -22,7 +22,7 @@
   },
   "dependencies"  : {
     "colors"      : "0.6.0-1",
-    "sshclient"   : "git://github.com/paulbjensen/node-sshclient.git",
+    "sshclient"   : "0.0.1",
     "underscore"  : "1.4.4"
   },
   "scripts"     : {
