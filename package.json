@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/axisto-live/redstone.git"
+    "url": "git://github.com/webcast-io/redstone.git"
   },
   "keywords": [
     "deployment"
