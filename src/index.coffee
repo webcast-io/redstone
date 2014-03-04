@@ -1,4 +1,4 @@
-sshclient = require 'sshclient'
+sshclient = require 'node-sshclient'
 
 # Create an object for loading modules that require each other.
 # This avoids a chicken-egg problem when decoupling modules

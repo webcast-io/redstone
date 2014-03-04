@@ -10,24 +10,28 @@
   "keywords": [
     "deployment"
   ],
-  "authors": ["Axisto Media Ltd <paul.jensen@axisto.com>", "Tom Loudon <tom.loudon@axisto.com>"],
-  "license"         : "BSD",
-  "readmeFilename"  : "README.md",
-  "gitHead"         : "f91751d7c86bfe495faaf4377ac8550182b9035a",
-  "devDependencies" : {
-    "coffee-script" : "1.6.2",
-    "docco"       : "0.6.2",
-    "mocha"       : "1.10.0",
-    "gently"      : "0.9.2"
+  "authors": [
+    "Axisto Media Ltd <paul.jensen@axisto.com>",
+    "Tom Loudon <tom.loudon@axisto.com>"
+    "Ben Evans <ben@bensbit.co.uk>"
+  ],
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "f91751d7c86bfe495faaf4377ac8550182b9035a",
+  "devDependencies": {
+    "coffee-script": "1.6.2",
+    "docco": "0.6.2",
+    "mocha": "1.10.0",
+    "gently": "0.9.2"
   },
-  "dependencies"  : {
-    "colors"      : "0.6.0-1",
-    "sshclient"   : "git://github.com/webcast-io/node-sshclient.git#bf0545d40cfed2b25e22bdb8b49513b8cca8a9c8",
-    "underscore"  : "1.4.4"
+  "dependencies": {
+    "colors": "0.6.0-1",
+    "underscore": "1.4.4",
+    "node-sshclient": "~0.1.0"
   },
-  "scripts"     : {
-    "compile"       : "node_modules/.bin/coffee -c -o lib src",
-    "compile-docs"  : "node_modules/.bin/docco src/*.coffee",
-    "test"          : "NODE_ENV=test node_modules/.bin/mocha --compilers coffee:coffee-script test/**/*"
+  "scripts": {
+    "compile": "node_modules/.bin/coffee -c -o lib src",
+    "compile-docs": "node_modules/.bin/docco src/*.coffee",
+    "test": "NODE_ENV=test node_modules/.bin/mocha --compilers coffee:coffee-script test/**/*"
   }
 }
