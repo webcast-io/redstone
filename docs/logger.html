@@ -63,21 +63,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p>Logs the command result to the terminal, and applies colors to indicate
-whether the command ran successfully or not.</p>
-<pre><code>@name                   {String}
-@args                   {String}
-@result                 {Object}</code></pre>
+              <p>Dependencies</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">logger</span></span> = (name, args, result) -&gt;
-  <span class="keyword">if</span> result.exitCode <span class="keyword">is</span> <span class="number">0</span>
-    console.log result.stdout.green
-    console.log <span class="string">"✔ <span class="subst">#{args}</span>"</span>.green
-  <span class="keyword">else</span>
-    console.log result.stderr.red
-    console.log <span class="string">"✘ <span class="subst">#{args}</span>"</span>.red</pre></div></div>
+            <div class="content"><div class='highlight'><pre>colors = <span class="hljs-built_in">require</span> <span class="hljs-string">'colors'</span></pre></div></div>
             
         </li>
         
@@ -88,13 +78,21 @@ whether the command ran successfully or not.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Attaches the public API function for the module</p>
-<pre><code>@libs                   {Object}</code></pre>
-
+              <p>Logs the command result to the terminal, and applies colors to indicate
+whether the command ran successfully or not.</p>
+<pre><code>@name                   {String}
+@args                   {String}
+@result                 {Object}
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">attach</span></span> = (libs) -&gt;
-  libs.logger = logger</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">logger</span> = <span class="hljs-params">(name, args, result)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> result.exitCode <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+    <span class="hljs-built_in">console</span>.log result.stdout.green
+    <span class="hljs-built_in">console</span>.log <span class="hljs-string">"✔ <span class="hljs-subst">#{args}</span>"</span>.green
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">console</span>.log result.stderr.red
+    <span class="hljs-built_in">console</span>.log <span class="hljs-string">"✘ <span class="hljs-subst">#{args}</span>"</span>.red</pre></div></div>
             
         </li>
         
@@ -105,11 +103,28 @@ whether the command ran successfully or not.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
+              <p>Attaches the public API function for the module</p>
+<pre><code>@libs                   {Object}
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">attach</span> = <span class="hljs-params">(libs)</span> -&gt;</span>
+  libs.logger = logger</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
               <p>Expose the attach function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = attach</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = attach</pre></div></div>
             
         </li>
         

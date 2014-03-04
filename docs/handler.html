@@ -68,14 +68,14 @@
 @currentCommandNumber   {Number}
 @result                 {Object}
 @context                {Object}
-@cb                     {Function}</code></pre>
-
+@cb                     {Function}
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">handleResult</span></span> = (commands, currentCommandNumber, result, context, cb) -&gt;
-    <span class="keyword">if</span> result.exitCode <span class="keyword">is</span> <span class="number">0</span>
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">handleResult</span> = <span class="hljs-params">(commands, currentCommandNumber, result, context, cb)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> result.exitCode <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
       handleSuccess commands, currentCommandNumber, context, cb
-    <span class="keyword">else</span>
+    <span class="hljs-keyword">else</span>
       handleFailure result.stderr, cb</pre></div></div>
             
         </li>
@@ -89,12 +89,12 @@
               </div>
               <p>Handles an executed command that failed</p>
 <pre><code>@errStack               {String}
-@cb                     {Function}</code></pre>
-
+@cb                     {Function}
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">handleFailure</span></span> = (errStack, cb) -&gt; 
-  cb <span class="keyword">new</span> Error errStack</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">handleFailure</span> = <span class="hljs-params">(errStack, cb)</span> -&gt;</span> 
+  cb <span class="hljs-keyword">new</span> Error errStack</pre></div></div>
             
         </li>
         
@@ -109,16 +109,16 @@
 <pre><code>@commands               {Array}
 @currentCommandNumber   {Number}
 @context                {Object}
-@cb                     {Function}</code></pre>
-
+@cb                     {Function}
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">handleSuccess</span></span> = (commands, currentCommandNumber, context, cb) -&gt;
-  <span class="keyword">if</span> currentCommandNumber &lt; commands.length-<span class="number">1</span>
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">handleSuccess</span> = <span class="hljs-params">(commands, currentCommandNumber, context, cb)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> currentCommandNumber &lt; commands.length-<span class="hljs-number">1</span>
     currentCommandNumber++
     context.libs.runner.runCommand context, commands, currentCommandNumber, cb
-  <span class="keyword">else</span>
-    cb <span class="literal">null</span></pre></div></div>
+  <span class="hljs-keyword">else</span>
+    cb <span class="hljs-literal">null</span></pre></div></div>
             
         </li>
         
@@ -130,11 +130,11 @@
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p>Attaches the public API function for the module</p>
-<pre><code>@libs                   {Object}</code></pre>
-
+<pre><code>@libs                   {Object}
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">attach</span></span> = (libs) -&gt;
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">attach</span> = <span class="hljs-params">(libs)</span> -&gt;</span>
   libs.handler = handleResult</pre></div></div>
             
         </li>
@@ -150,7 +150,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = attach</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = attach</pre></div></div>
             
         </li>
         

@@ -66,13 +66,13 @@
               <p>This adds commands into the instance so that the ssh client can execute them</p>
 <pre><code>@context                {Object}        
 @name                   {String}
-@args                   {String}</code></pre>
-
+@args                   {String}
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">loader</span></span> = (context, name, args) -&gt;
-  context[name] = (cb) =&gt;
-    context.ssh.command args, (result) =&gt;
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">loader</span> = <span class="hljs-params">(context, name, args)</span> -&gt;</span>
+  context[name] = <span class="hljs-function"><span class="hljs-params">(cb)</span> =&gt;</span>
+    context.ssh.command args, <span class="hljs-function"><span class="hljs-params">(result)</span> =&gt;</span>
       context.libs.logger name, args, result
       cb result</pre></div></div>
             
@@ -86,11 +86,11 @@
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
               <p>Attaches the public API function for the module</p>
-<pre><code>@libs                   {Object}</code></pre>
-
+<pre><code>@libs                   {Object}
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">attach</span></span> = (libs) -&gt;
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">attach</span> = <span class="hljs-params">(libs)</span> -&gt;</span>
   libs.loader = loader</pre></div></div>
             
         </li>
@@ -106,7 +106,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = attach</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = attach</pre></div></div>
             
         </li>
         

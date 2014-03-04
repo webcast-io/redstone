@@ -67,14 +67,14 @@
 function, if one is provided</p>
 <pre><code>@context                {Object}
 @commands               {Array}
-@cb                     {Function}</code></pre>
-
+@cb                     {Function}
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">runCommands</span></span> = (context, commands, cb) -&gt;
-  currentCommandNumber = <span class="number">0</span>
-  runCommand context, commands, currentCommandNumber, (err) -&gt;
-    cb err <span class="keyword">if</span> <span class="keyword">typeof</span> cb <span class="keyword">is</span> <span class="string">'function'</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">runCommands</span> = <span class="hljs-params">(context, commands, cb)</span> -&gt;</span>
+  currentCommandNumber = <span class="hljs-number">0</span>
+  runCommand context, commands, currentCommandNumber, <span class="hljs-function"><span class="hljs-params">(err)</span> -&gt;</span>
+    cb err <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> cb <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span></pre></div></div>
             
         </li>
         
@@ -89,13 +89,13 @@ function, if one is provided</p>
 <pre><code>@context                {Object}
 @commands               {Array}
 @currentCommandNumber   {Number}
-@cb                     {Function}</code></pre>
-
+@cb                     {Function}
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">runCommand</span></span> = (context, commands, currentCommandNumber, cb) -&gt;
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">runCommand</span> = <span class="hljs-params">(context, commands, currentCommandNumber, cb)</span> -&gt;</span>
   commandToRun = commands[currentCommandNumber]
-  context[commandToRun] (result) -&gt;
+  context[commandToRun] <span class="hljs-function"><span class="hljs-params">(result)</span> -&gt;</span>
     context.libs.handler commands, currentCommandNumber, result, context, cb</pre></div></div>
             
         </li>
@@ -108,11 +108,11 @@ function, if one is provided</p>
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <p>Attaches the public API function for the module</p>
-<pre><code>@libs                   {Object}</code></pre>
-
+<pre><code>@libs                   {Object}
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">attach</span></span> = (libs) -&gt;
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">attach</span> = <span class="hljs-params">(libs)</span> -&gt;</span>
   libs.runner = {runCommands, runCommand}</pre></div></div>
             
         </li>
@@ -128,7 +128,7 @@ function, if one is provided</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = attach</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = attach</pre></div></div>
             
         </li>
         
