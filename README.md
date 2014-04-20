@@ -53,4 +53,4 @@ To run a list of commands in order, provide an array of commands, then a callbac
 License
 ---
 
-&copy; 2013 Axisto Media Ltd. Redstone is licensed under the BSD License.
+&copy; 2014 Axisto Media Ltd. Redstone is licensed under the BSD License.
