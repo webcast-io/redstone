@@ -1,6 +1,6 @@
 ![Redstone](https://raw.github.com/axisto-live/redstone/master/redstone.png)
 
-[![Codacy Badge](https://www.codacy.com/project/badge/b8459f39626d47d5952686542797ca64)](https://www.codacy.com)
+[![Codacy Badge](https://www.codacy.com/project/badge/f27c4fcb42544caab91fe4a506a6df3f)](https://www.codacy.com)
 
 A tool for remotely executing scripts on servers, such as deploying apps.
 
